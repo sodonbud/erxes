@@ -2,10 +2,9 @@ import { EngageMessages } from '../../models';
 import { _Tags, _Customers } from '../../apiCollections';
 
 import { requireLogin, checkPermission } from '@erxes/permission-utils';
-import { IUserDocument } from '../../../db/models/definitions/users';
-// import { checkPermission, requireLogin } from '../../permissions/wrappers';
+import { IUserDocument, paginate } from 'erxes-api-utils';
+
 import { IContext } from '../../types';
-import { paginate } from '../../utils';
 
 interface IListArgs {
   kind?: string;

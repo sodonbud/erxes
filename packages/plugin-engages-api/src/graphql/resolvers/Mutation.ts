@@ -1,16 +1,15 @@
+import { sendToWebhook } from 'erxes-api-utils';
 import * as _ from 'underscore';
 import { EngageMessages } from '../../models';
 import { _Customers } from '../../apiCollections';
 import { checkPermission } from '@erxes/permission-utils';
-import { IEngageMessage } from '../../../db/models/definitions/engages';
-import { MESSAGE_KINDS, MODULE_NAMES } from '../../constants';
+import { CAMPAIGN_KINDS, MODULE_NAMES } from '../../constants';
 import { putCreateLog, putDeleteLog, putUpdateLog } from '../../logUtils';
-// import { checkPermission } from '../../permissions/wrappers';
-import { IContext } from '../../types';
-import { sendToWebhook } from '../../utils';
 import { registerOnboardHistory } from '../../messageBroker';
+import { IEngageMessage } from '../../types';
+import { IContext } from '../../types';
 import { getDocument } from './cacheUtils';
-import { checkCampaignDoc, send } from './engageUtils';
+import { checkCampaignDoc, send } from '../../engageUtils';
 import EditorAttributeUtil from '../../editorAttributeUtils';
 
 interface IEngageMessageEdit extends IEngageMessage {
@@ -92,7 +91,7 @@ const engageMutations = {
     if (
       !engageMessage.isLive &&
       doc.isLive &&
-      doc.kind === MESSAGE_KINDS.MANUAL
+      doc.kind === CAMPAIGN_KINDS.MANUAL
     ) {
       await send(updated);
     }
